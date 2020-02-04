@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Event Editor</title>
+		<meta charset="utf-8">
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+		<script src="event.js"></script>
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
+		<h1>Event Editor</h1>
+		<textarea id="json" cols="100" rows="10" oninput="load()" readonly></textarea><br>
+		<span>Safe Mode: <input type="checkbox" id="safemode" onchange="toggleSafeMode()" checked></input></span><br>
+		<h2>Events</h2>
+		<table id="events" align="center"></table>
+		<button id="add">Add Event</button>
+	</body>
+</html>
