@@ -1,55 +1,43 @@
 "use strict";
 
-function update(index = -1)
+function boot()
 {
-	var output = '';
+	MAP_EVENTS.innerHTML = '';
 	
 	try
 	{
-		var data = JSON.parse($('#input').val());
+		var data = JSON.parse(MAP_JSON.value);
 		
-		if(index !== -1)
-		{
-			$('#event-table').empty();
-			var events = data['entities'][index]['settings']['event'];
-			output += JSON.stringify(events);
-			
-			for(var i = 0; i < events.length; i++)
-			{
-				var row = '<td name="type"><b>' + events[i]['type'] + '</b></td>';
-				
-				for(var node in events[i])
-				{
-					if(node !== 'type')
-						row += '<td name="' + node + '"><input type="text" value="' + events[i][node] + '"></input></td>';
-				}
-				
-				$('#event-table').append('<tr><td><button class="delete">Delete</button></td>' + row + '</tr>');
-			}
-		}
-		else
-		{
-			$('#event-list').empty();
-			
-			for(var i = 0; i < data['entities'].length; i++)
-			{
-				if(data['entities'][i]['type'] === 'EventTrigger')
-				{
-					$('#event-list').append('<input type="radio" name="event" value="' + i + '">' + data['entities'][i]['settings']['name'] + '</input>');
-					$('input[name="event"]').change(function() {update(parseInt($('input[name="event"]:checked').val()));});
-				}
-			}
-			
-			$('#event-table').before('<h2>Properties</h2>');
-			
-			output = JSON.stringify(data);
-		}
+		for(var i = 0; i < data['entities'].length; i++)
+			if(data['entities'][i]['type'] === 'EventTrigger')
+				MAP_EVENTS.innerHTML += '<input type="radio" name="event" onchange="transfer(parseInt(this.value))" value="' + i + '">' + data['entities'][i]['settings']['name'] + '</input>';
 	}
-	catch(error) {output += error;}
-	
-	$('#output').val(output);
+	catch(error) {MAP_JSON.value = error;}
 }
 
-$(document).ready(function() {
-	$('#event-table').on('click', '.delete', function() {$(this).closest('tr').remove();});
-});
+function transfer(index = -1)
+{
+	if(index !== -1)
+	{
+		try
+		{
+			var data = JSON.parse(MAP_JSON.value);
+			EVENTS_JSON.value = JSON.stringify(data['entities'][index]['settings']['event']);
+			load();
+		}
+		catch(error) {EVENTS_JSON.value = error;}
+	}
+}
+
+function push()
+{
+	for(var i = 0; i < MAP_EVENTS.children.length; i++)
+	{
+		if(MAP_EVENTS.children[i].checked)
+		{
+			var data = JSON.parse(MAP_JSON.value);
+			data['entities'][parseInt(MAP_EVENTS.children[i].value)]['settings']['event'] = JSON.parse(EVENTS_JSON.value);
+			MAP_JSON.value = JSON.stringify(data);
+		}
+	}
+}

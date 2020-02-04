@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Character Viewer</title>
+		<meta charset="utf-8">
+		<script src="char.js"></script>
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
+		<h1>Character Viewer</h1>
+		<textarea id="main" rows="10" cols="100" oninput="boot()" placeholder="Paste your main file here, ie the entire character JSON text."></textarea><br>
+		<textarea id="out" rows="10" cols="100" readonly></textarea><br>
+	</body>
+	<script>
+		const MAIN = document.getElementById('main');
+		const OUT = document.getElementById('out');
+	</script>
+</html>

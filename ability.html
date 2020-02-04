@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Ability Editor</title>
+		<meta charset="utf-8">
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+		<script src="ability.js"></script>
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
+		<h1>Ability Editor</h1>
+		<span>Name: <input type="text" id="name" oninput="update(1)"></input>
+			<select id="lang_name" onchange="swap_name()">
+				<option value="en_US">English</option>
+				<option value="de_DE">German</option>
+				<option value="zh_CN">Chinese</option>
+				<option value="ja_JP">Japanese</option>
+				<option value="ko_KR">Korean</option>
+			</select>
+		</span><br>
+		<span>Description: <input type="text" id="desc" oninput="update(2)"></input>
+			<select id="lang_desc" onchange="swap_desc()">
+				<option value="en_US">English</option>
+				<option value="de_DE">German</option>
+				<option value="zh_CN">Chinese</option>
+				<option value="ja_JP">Japanese</option>
+				<option value="ko_KR">Korean</option>
+			</select>
+		</span><br>
+		<span>Damage Type:
+			<select id="dmgType" onchange="update()">
+				<option value="MELEE">Melee</option>
+				<option value="RANGED">Ranged</option>
+				<option value="NONE">None</option>
+				<option value="MIXED">Mixed</option>
+			</select>
+		</span><br>
+		<span>Stun Type:
+			<select id="stunType" onchange="update()">
+				<option value="">None</option>
+				<option value="INTERRUPT">Interrupt</option>
+				<option value="LOCK">Lock</option>
+			</select>
+		</span><br>
+		<span>Apply Elemental Status Effect (ie Burn, Chill, Shock, Mark)? <input type="checkbox" id="status" onchange="update()"></input></span><br>
+		<textarea id="output" cols="100" rows="10" readonly></textarea>
+		<h2>Steps</h2>
+		<table id="steps" align="center"></table>
+		<button id="add">Add Step</button>
+	</body>
+</html>

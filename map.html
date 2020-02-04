@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Map Events Editor</title>
+		<title>Map Editor</title>
 		<meta charset="utf-8">
-		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 		<script src="map.js"></script>
+		<script src="event.js"></script>
 		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
 	<body>
-		<h1>Map Events Editor</h1>
-		<textarea id="input" rows="10" cols="100" oninput="update()"></textarea><br>
-		<textarea id="output" rows="10" cols="100" readonly></textarea><br>
+		<h1>Map Editor</h1>
+		<textarea id="main" rows="10" cols="100" oninput="boot()" placeholder="Paste your main file here, ie the entire map JSON text."></textarea><br>
 		<div id="event-list"></div>
-		<!--<table id="event-table" align="center"></table>-->
+		<button onclick="push()">↑ Push Changes ↑</button>
+		<h1>Event Editor</h1>
+		<textarea id="json" rows="10" cols="100" oninput="load()" placeholder="This is where you can manage individual events." readonly></textarea><br>
+		<span>Safe Mode: <input type="checkbox" id="safemode" onchange="toggleSafeMode()" checked></input></span><br>
+		<h2>Events</h2>
+		<table id="events" align="center"></table>
+		<button onclick="addRow()">Add Event</button>
 	</body>
+	<script>
+		const MAP_JSON = document.getElementById('main');
+		const MAP_EVENTS = document.getElementById('event-list');
+		const EVENTS_GUI = document.getElementById('events');
+		const EVENTS_JSON = document.getElementById('json');
+		const EVENTS_JSON_SAFEMODE = document.getElementById('safemode');
+	</script>
 </html>
