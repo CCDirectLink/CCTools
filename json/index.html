@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>JSON Tools</title>
+		<meta charset="utf-8">
+		<script src="script.js"></script>
+	</head>
+	<body style="text-align:center;">
+		<h1>JSON Tools</h1>
+		<div><textarea id="field" cols="150" rows="25" oninput="$$()" placeholder="If Compress JSON is unchecked, you place a compressed JSON file here to space it out. If Compress JSON is checked, you place spaced JSON here to compress it."></textarea></div>
+		<div><input type="checkbox" id="mode" onclick="$$()"><span>Compress JSON</span></div>
+		<div><input type="checkbox" id="ascii" onclick="$$()"><span>ASCII Compatible</span></div>
+	</body>
+	<script>
+		const FIELD = document.getElementById('field');
+		const MODE = document.getElementById('mode');
+		const ASCII = document.getElementById('ascii');
+	</script>
+</html>

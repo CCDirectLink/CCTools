@@ -1,2 +1,2 @@
 # CCTools
-Various tools I made to assist with modding CrossCode.
+Various tools I made to assist myself with modding CrossCode. If I decide to go anywhere with these projects, they'll go into a separate repository because at that point, it'll be meant for other people to use rather than just myself.
