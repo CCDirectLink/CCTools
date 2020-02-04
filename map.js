@@ -2,39 +2,52 @@
 
 function update(index = -1)
 {
+	var output = '';
+	
 	try
 	{
 		var data = JSON.parse($('#input').val());
-		console.log(data);
-		$('#add').empty().append('<h2>' + data['name'] + '</h2><canvas id="map" width="' + (16*data['mapWidth']) + '" height="' + (16*data['mapHeight']) + '" style="border:1px solid #000000;"></canvas>');
-	}
-	catch(error) {output += error;}
-}
-
-function edit()
-{
-	var table = document.getElementById('event-table');
-	var entries = [];
-	
-	for(var i = 0, row; row = table.rows[i]; i++)
-	{
-		entries[i] = {};
 		
-		for(var j = 1, col; col = row.cells[j]; j++)
+		if(index !== -1)
 		{
-			var key = col.getAttribute('name');
-			var value;
+			$('#event-table').empty();
+			var events = data['entities'][index]['settings']['event'];
+			output += JSON.stringify(events);
 			
-			if(key === 'type')
-				value = col.children[0].innerHTML;
-			else
-				value = col.children[0].value;
+			for(var i = 0; i < events.length; i++)
+			{
+				var row = '<td name="type"><b>' + events[i]['type'] + '</b></td>';
+				
+				for(var node in events[i])
+				{
+					if(node !== 'type')
+						row += '<td name="' + node + '"><input type="text" value="' + events[i][node] + '"></input></td>';
+				}
+				
+				$('#event-table').append('<tr><td><button class="delete">Delete</button></td>' + row + '</tr>');
+			}
+		}
+		else
+		{
+			$('#event-list').empty();
 			
-			entries[i][key] = value;
+			for(var i = 0; i < data['entities'].length; i++)
+			{
+				if(data['entities'][i]['type'] === 'EventTrigger')
+				{
+					$('#event-list').append('<input type="radio" name="event" value="' + i + '">' + data['entities'][i]['settings']['name'] + '</input>');
+					$('input[name="event"]').change(function() {update(parseInt($('input[name="event"]:checked').val()));});
+				}
+			}
+			
+			$('#event-table').before('<h2>Properties</h2>');
+			
+			output = JSON.stringify(data);
 		}
 	}
+	catch(error) {output += error;}
 	
-	console.log(entries);
+	$('#output').val(output);
 }
 
 $(document).ready(function() {

@@ -3,7 +3,6 @@
 	<head>
 		<title>Event Editor</title>
 		<meta charset="utf-8">
-		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 		<script src="event.js"></script>
 		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
@@ -13,6 +12,11 @@
 		<span>Safe Mode: <input type="checkbox" id="safemode" onchange="toggleSafeMode()" checked></input></span><br>
 		<h2>Events</h2>
 		<table id="events" align="center"></table>
-		<button id="add">Add Event</button>
+		<button onclick="addRow()">Add Event</button>
 	</body>
+	<script>
+		const EVENTS_GUI = document.getElementById('events');
+		const EVENTS_JSON = document.getElementById('json');
+		const EVENTS_JSON_SAFEMODE = document.getElementById('safemode');
+	</script>
 </html>
