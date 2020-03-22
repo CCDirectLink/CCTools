@@ -57,7 +57,7 @@ const $$ = (() => {
 				for(let key in data)
 				{
 					let comma = (index++ === Object.keys(data).length) ? '' : ',';
-					output += tabs(height+1) + beautify(key) + ((!REMOVE.checked && typeof data[key] !== 'object') ? ': ' : ':') + beautify(data[key], height+1, true) + comma + '\n';
+					output += tabs(height+1) + beautify(key) + ((!REMOVE.checked && !isExpansive(data[key])) ? ': ' : ':') + beautify(data[key], height+1, true) + comma + '\n';
 				}
 				
 				output += tabs(height) + '}';
@@ -104,5 +104,15 @@ const $$ = (() => {
 			output += '\t';
 		
 		return output;
+	}
+	
+	function isExpansive(data)
+	{
+		if(data !== null && data.constructor === Object)
+			return Object.keys(data).length !== 0;
+		else if(data !== null && data.constructor === Array)
+			return data.length !== 0 && !isSimpleArray(data);
+		else
+			return false;
 	}
 })();
